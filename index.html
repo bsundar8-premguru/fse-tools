@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A curated launcher for FSE learning and engineering applications.">
+  <meta name="theme-color" content="#eef5fb">
+  <title>FSE Apps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #eef5fb;
+      --ink: #17243a;
+      --muted: #526b87;
+      --surface: rgba(255, 255, 255, .8);
+      --line: rgba(96, 128, 162, .22);
+      --shadow: 0 24px 52px rgba(31, 65, 104, .16);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --page: #101827;
+      --ink: #eff6ff;
+      --muted: #acc0d7;
+      --surface: rgba(24, 38, 60, .84);
+      --line: rgba(179, 205, 234, .2);
+      --shadow: 0 24px 52px rgba(0, 0, 0, .36);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 280px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 13% 2%, #d6f5ff 0, transparent 24rem),
+        radial-gradient(circle at 91% 17%, #f0dcff 0, transparent 25rem),
+        var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    [data-theme="dark"] body {
+      background:
+        radial-gradient(circle at 13% 2%, #123b55 0, transparent 24rem),
+        radial-gradient(circle at 91% 17%, #382257 0, transparent 25rem),
+        var(--page);
+    }
+
+    .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+
+    .theme-toggle {
+      position: fixed;
+      z-index: 10;
+      top: 22px;
+      right: max(22px, calc((100vw - 1080px) / 2));
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      padding: 0;
+      color: var(--ink);
+      cursor: pointer;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      box-shadow: 0 9px 25px rgba(22, 49, 81, .14);
+      backdrop-filter: blur(12px);
+      transition: transform .18s ease, background .25s ease;
+    }
+
+    .theme-toggle:hover { transform: translateY(-2px) rotate(9deg); }
+    .theme-toggle svg { width: 22px; height: 22px; }
+    .theme-toggle:focus-visible, .app:focus-visible { outline: 4px solid #2c9eea; outline-offset: 4px; }
+
+    main { min-height: 100vh; display: grid; align-content: center; padding: 92px 0 70px; }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(2.2rem, 7vw, 4.6rem);
+      line-height: .96;
+      letter-spacing: -.055em;
+    }
+
+    .eyebrow {
+      margin: 18px 0 46px;
+      color: var(--muted);
+      font-size: clamp(.78rem, 1.8vw, .94rem);
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .app-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+
+    .app {
+      --a1: #ff9d12;
+      --a2: #f21c76;
+      position: relative;
+      display: grid;
+      min-height: 270px;
+      align-content: center;
+      justify-items: center;
+      gap: 20px;
+      padding: 30px 22px 27px;
+      overflow: hidden;
+      color: var(--ink);
+      text-align: center;
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 10px 28px rgba(35, 73, 115, .08);
+      backdrop-filter: blur(12px);
+      transition: transform .22s ease, box-shadow .22s ease, background .25s ease;
+    }
+
+    .app::before {
+      position: absolute;
+      right: -50px;
+      bottom: -70px;
+      width: 175px;
+      height: 175px;
+      content: "";
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      border-radius: 50%;
+      opacity: .13;
+    }
+
+    .app::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background: linear-gradient(125deg, rgba(255,255,255,.18), transparent 42%);
+    }
+
+    .app:hover, .app:focus-visible { transform: translateY(-8px); box-shadow: var(--shadow); }
+    .app:hover .logo, .app:focus-visible .logo { transform: scale(1.06) rotate(-2deg); }
+
+    .app.mad-hatter,
+    .app.team-norms,
+    .app.scamper,
+    .app.gear-experiment,
+    .app.compound-gears,
+    .app.ohms-law { --a1: #076fe8; --a2: #ffc21c; }
+
+    .logo {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 128px;
+      height: 128px;
+      place-items: center;
+      overflow: hidden;
+      color: white;
+      background-color: rgba(255, 255, 255, .9);
+      background-repeat: no-repeat;
+      border-radius: 35px;
+      box-shadow: 0 17px 30px rgba(0, 61, 140, .24);
+      transition: transform .22s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .logo.ref-strip {
+      background-image: url("../ChatGPT Image Sep 9, 2026, 09_00_06 AM.png");
+      background-size: 300% 100%;
+    }
+
+    .logo.engineering-strip {
+      background-image: url("assets/engineering-app-logos.png");
+      background-size: 300% 100%;
+    }
+
+    .logo.sprite-left { background-position: 0 center; }
+    .logo.sprite-center { background-position: 50% center; }
+    .logo.sprite-right { background-position: 100% center; }
+
+    .logo.mad-hatter-logo { padding: 5px; }
+    .logo.mad-hatter-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+    .app-title { position: relative; z-index: 1; font-size: 1.08rem; font-weight: 850; line-height: 1.25; }
+    .app-note { position: relative; z-index: 1; margin-top: -12px; color: var(--muted); font-size: .82rem; font-weight: 650; }
+    footer { margin-top: 36px; color: var(--muted); font-size: .86rem; text-align: center; }
+
+    @media (max-width: 800px) {
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 26px, 420px); }
+      main { padding-top: 86px; }
+      .theme-toggle { top: 17px; right: 17px; }
+      .app-grid { grid-template-columns: 1fr; gap: 18px; }
+      .app { min-height: 235px; }
+      .eyebrow { margin-bottom: 32px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" type="button" aria-label="Switch color theme"></button>
+
+  <main class="shell">
+    <h1>FSE Apps</h1>
+    <p class="eyebrow">Explore · Experiment · Engineer</p>
+
+    <section class="app-grid" aria-label="FSE application launcher">
+      <a class="app team-norms" href="https://bsundar8-premguru.github.io/team-norm-evaluator/" target="_blank" rel="noopener noreferrer" aria-label="Open Team Norm Evaluator in a new tab">
+        <span class="logo ref-strip sprite-center" aria-hidden="true"></span>
+        <span class="app-title">Team Norm Evaluator</span>
+        <span class="app-note">Team health check</span>
+      </a>
+
+      <a class="app scamper" href="https://bsundar8-premguru.github.io/SCAMPER/" target="_blank" rel="noopener noreferrer" aria-label="Open SCAMPER in a new tab">
+        <span class="logo ref-strip sprite-right" aria-hidden="true"></span>
+        <span class="app-title">SCAMPER</span>
+        <span class="app-note">Creative ideation</span>
+      </a>
+
+      <a class="app mad-hatter" href="https://bsundar8-premguru.github.io/mad-hatter-full-stack/" target="_blank" rel="noopener noreferrer" aria-label="Open Mad Hatter in a new tab">
+        <span class="logo mad-hatter-logo" aria-hidden="true">
+          <img src="../Logo_ChatGPT Image Aug 13, 2026, 11_14_15 AM.png" alt="">
+        </span>
+        <span class="app-title">Mad Hatter</span>
+        <span class="app-note">Perspective exploration</span>
+      </a>
+
+      <a class="app ohms-law" href="https://bsundar8-premguru.github.io/ohms-law-circuit-interactive/" target="_blank" rel="noopener noreferrer" aria-label="Open Ohm's Law Circuit Interactive in a new tab">
+        <span class="logo engineering-strip sprite-left" aria-hidden="true"></span>
+        <span class="app-title">Ohm's Law Circuit</span>
+        <span class="app-note">Interactive circuit lab</span>
+      </a>
+
+      <a class="app gear-experiment" href="https://bsundar8-premguru.github.io/gear-experiment/" target="_blank" rel="noopener noreferrer" aria-label="Open Gear Experiment in a new tab">
+        <span class="logo engineering-strip sprite-center" aria-hidden="true"></span>
+        <span class="app-title">Gear Experiment</span>
+        <span class="app-note">Hands-on mechanics</span>
+      </a>
+
+      <a class="app compound-gears" href="https://bsundar8-premguru.github.io/compound-gear-simulator/" target="_blank" rel="noopener noreferrer" aria-label="Open Compound Gear Simulator in a new tab">
+        <span class="logo engineering-strip sprite-right" aria-hidden="true"></span>
+        <span class="app-title">Compound Gear Simulator</span>
+        <span class="app-note">Gear trains &amp; ratios</span>
+      </a>
+    </section>
+
+    <footer>Select an app to open it in a new tab.</footer>
+  </main>
+
+  <script>
+    const button = document.querySelector('.theme-toggle');
+    const sun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+    const moon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>';
+
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      const dark = theme === 'dark';
+      button.innerHTML = dark ? moon : sun;
+      button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      localStorage.setItem('fse-apps-theme', theme);
+    }
+
+    setTheme(localStorage.getItem('fse-apps-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    button.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+  </script>
+</body>
+</html>
