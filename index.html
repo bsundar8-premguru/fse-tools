@@ -102,8 +102,8 @@
     .app:hover .logo, .app:focus-visible .logo { transform: scale(1.06) rotate(-2deg); }
     .app.new-tool { --a1: #ffc21c; --a2: #076fe8; }
     .logo { position: relative; z-index: 1; display: grid; width: 118px; height: 118px; place-items: center; overflow: hidden; background-color: rgba(255,255,255,.92); background-repeat: no-repeat; border-radius: 32px; box-shadow: 0 17px 30px rgba(0,61,140,.24); transition: transform .22s cubic-bezier(.2,.8,.2,1); }
-    .logo.ref-strip { background-image: url("../ChatGPT Image Sep 9, 2026, 09_00_06 AM.png"); background-size: 300% 100%; }
-    .logo.engineering-strip { background-image: url("../FSE Apps/assets/engineering-app-logos.png"); background-size: 300% 100%; }
+    .logo.ref-strip { background-image: url("assets/fse-ideation-logos.png"); background-size: 300% 100%; }
+    .logo.engineering-strip { background-image: url("assets/engineering-app-logos.png"); background-size: 300% 100%; }
     .logo.sprite-left { background-position: 0 center; }
     .logo.sprite-center { background-position: 50% center; }
     .logo.sprite-right { background-position: 100% center; }
@@ -112,8 +112,6 @@
     .logo.problem-logo { padding: 5px; }
     .app-title { position: relative; z-index: 1; font-size: 1.03rem; font-weight: 850; line-height: 1.25; }
     .app-note { position: relative; z-index: 1; margin-top: -11px; color: var(--muted); font-size: .79rem; font-weight: 650; }
-    .local-badge { position: absolute; z-index: 2; top: 14px; right: 14px; padding: 5px 8px; color: #084a9b; background: #e8f3ff; border: 1px solid #a9d3ff; border-radius: 999px; font-size: .65rem; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
-    [data-theme="dark"] .local-badge { color: #d9ecff; background: #173d66; border-color: #386b9e; }
     footer { margin-top: 34px; color: var(--muted); font-size: .84rem; text-align: center; }
     @media (max-width: 1040px) { .app-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     @media (max-width: 780px) { .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -136,21 +134,18 @@
         <span class="logo ref-strip sprite-right" aria-hidden="true"></span><span class="app-title">SCAMPER</span><span class="app-note">Creative ideation</span>
       </a>
 
-      <!-- Replace this local href with the final GitHub Pages URL when available. -->
-      <a class="app new-tool" href="https://bsundar8-premguru.github.io/problem-framing-challenger/" aria-label="Open the local Problem Framing Challenger">
-        <span class="logo image-logo problem-logo" aria-hidden="true"><img src="../problem-framing-challenger/assets/problem-framing-challenger-logo.png" alt=""></span>
-        <span class="app-title">Problem Framing Challenger</span><span class="app-note">Hosted link pending</span>
+      <a class="app new-tool" href="https://bsundar8-premguru.github.io/problem-framing-challenger/" target="_blank" rel="noopener noreferrer" aria-label="Open Problem Framing Challenger in a new tab">
+        <span class="logo image-logo problem-logo" aria-hidden="true"><img src="assets/problem-framing-challenger-logo.png" alt=""></span>
+        <span class="app-title">Problem Framing Challenger</span><span class="app-note">Challenge assumptions</span>
       </a>
 
-      <!-- Replace this local href with the final GitHub Pages URL when available. -->
-      <a class="app new-tool" href="https://bsundar8-premguru.github.io/requirements-criteria-evaluator/" aria-label="Open the local Requirements and Criteria Evaluator">
-        
-        <span class="logo image-logo" aria-hidden="true"><img src="../requirements_criteria_evaluator/requirements_criteria_evaluator/frontend/assets/requirements-criteria-evaluator-logo.png" alt=""></span>
-        <span class="app-title">Requirements &amp; Criteria Evaluator</span><span class="app-note">Hosted link pending</span>
+      <a class="app new-tool" href="https://bsundar8-premguru.github.io/requirements-criteria-evaluator/" target="_blank" rel="noopener noreferrer" aria-label="Open Requirements and Criteria Evaluator in a new tab">
+        <span class="logo image-logo" aria-hidden="true"><img src="assets/requirements-criteria-evaluator-logo.png" alt=""></span>
+        <span class="app-title">Requirements &amp; Criteria Evaluator</span><span class="app-note">Strengthen design decisions</span>
       </a>
 
       <a class="app" href="https://bsundar8-premguru.github.io/mad-hatter-full-stack/" target="_blank" rel="noopener noreferrer" aria-label="Open Mad Hatter in a new tab">
-        <span class="logo image-logo" aria-hidden="true"><img src="../Logo_ChatGPT Image Aug 13, 2026, 11_14_15 AM.png" alt=""></span><span class="app-title">Mad Hatter</span><span class="app-note">Perspective exploration</span>
+        <span class="logo image-logo" aria-hidden="true"><img src="assets/mad-hatter-logo.png" alt=""></span><span class="app-title">Mad Hatter</span><span class="app-note">Perspective exploration</span>
       </a>
       <a class="app" href="https://bsundar8-premguru.github.io/ohms-law-circuit-interactive/" target="_blank" rel="noopener noreferrer" aria-label="Open Ohm's Law Circuit Interactive in a new tab">
         <span class="logo engineering-strip sprite-left" aria-hidden="true"></span><span class="app-title">Ohm's Law Circuit</span><span class="app-note">Interactive circuit lab</span>
@@ -162,7 +157,7 @@
         <span class="logo engineering-strip sprite-right" aria-hidden="true"></span><span class="app-title">Compound Gear Simulator</span><span class="app-note">Gear trains &amp; ratios</span>
       </a>
     </section>
-    <footer>Select an app to open it. New tools use local previews until hosted links are available.</footer>
+    <footer>Select an app to open it in a new tab.</footer>
   </main>
   <script>
     const button = document.querySelector('.theme-toggle');
